@@ -1,0 +1,26 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;;
+public class prgm20 {
+    public static void main(String[] args) throws Exception {
+        System.setProperty("webdriver.chrome.driver","E:\\Software testing\\chromedriver-win64\\chromedriver.exe");
+        System.out.println("Automating login into NMIT LMS for ProPratheek...");
+        WebDriver driver1 = new ChromeDriver();
+        driver1.get("http://lms.nmit.ac.in/moodle/login/index.php");
+        driver1.findElement(By.name("username")).sendKeys("1nt21cs132");
+        driver1.findElement(By.name("password")).sendKeys("Pnpp@2003");
+        driver1.findElement(By.id("loginbtn")).click();
+        Thread.sleep(10000);   
+        driver1.quit();
+        System.setProperty("webdriver.chrome.driver","E:\\Software testing\\chromedriver-win64\\chromedriver.exe");
+        System.out.println("Automating login into NMIT LMS for ProPratheek...");
+        WebDriver driver = new FirefoxDriver();
+        driver.get("http://lms.nmit.ac.in/moodle/login/index.php");
+        driver1.findElement(By.name("username")).sendKeys("1nt21cs132");
+        driver1.findElement(By.name("password")).sendKeys("Pnpp@2003");
+        driver1.findElement(By.id("loginbtn")).click();
+        Thread.sleep(10000);   
+        driver.quit();
+    }
+}
