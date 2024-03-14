@@ -2,46 +2,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class prog18 implements Runnable {
-    
-    WebDriver driver;
-    Boolean type;
-    Thread agent;
-
-    prog18(Boolean type) {
-        this.type = type;
-        agent = new Thread(this, "Agent for "+type+" case");
+class lms  implements Runnable{
+    String username,password;
+    lms(String username,String password)
+    {
+        this.username=username;
+        this.password=password;
     }
-
-    public void run() {
-        System.setProperty("webdriver.chrome.driver","E:\\Software testing\\chromedriver-win64\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://practicetestautomation.com/practice-test-login/");
-        if(type) {
-            driver.findElement(By.id("username")).sendKeys("student");
-            driver.findElement(By.id("password")).sendKeys("Password123");
-            driver.findElement(By.id("submit")).click();
-        } else {
-            driver.findElement(By.id("username")).sendKeys("random");
-            driver.findElement(By.id("password")).sendKeys("rpass");
-            driver.findElement(By.id("submit")).click();
-        }
-        try {
-            System.out.println(driver.findElement(By.className("has-text-align-center")).getText());
-        } catch(org.openqa.selenium.NoSuchElementException e) {
-            System.out.println("username or password is wrong.");
-        }
-        driver.quit();
+    public void run()
+    {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\HP\\Desktop\\SoftwareTesting\\src\\Driver\\chromedriver.exe");
+        WebDriver driver=new ChromeDriver();
+        driver.get("http://lms.nmit.ac.in/moodle/login/index.php");
+        driver.findElement(By.id("username")).sendKeys("username");
+        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.id("loginbtn")).click();
     }
+}
 
-    public static void main(String[] args) throws InterruptedException {
-        prog18 positive = new prog18(true);
-        prog18 negative = new prog18(false);
 
-        positive.agent.start();
-        negative.agent.start();
-        positive.agent.join();
-        negative.agent.join();
-        
+public class pro18 {
+    public static void main(String args[]) throws Exception
+    {
+        lms obj1=new lms("1NT21CS126","Prajjwal_0509");
+        lms obj2=new lms("1NT21CS130","PranjalSingh@123");
+
+        Thread t1=new Thread(obj1);
+        Thread t2=new Thread(obj2);
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
     }
 }
